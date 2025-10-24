@@ -1,27 +1,29 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import TenderoRegistro from "./tendero/TenderoRegistro";
+import PedidoForm from "./tendero/PedidoForm";
+import PedidosList from "./tendero/PedidosList";
 
-// Componente principal de la aplicación
 function App() {
-  // Estado para guardar el mensaje que viene del backend
-  const [mensaje, setMensaje] = useState("");
+  const [tenderoId, setTenderoId] = useState(null);
+  const [productos, setProductos] = useState([]);
 
-  // Hook que se ejecuta una sola vez al cargar el componente
+  // Aquí podrías cargar los productos desde el backend
   useEffect(() => {
-    // Hace una petición GET al backend
-    fetch("/api/mensaje")
-      // Convierte la respuesta a JSON
-      .then((res) => res.json())
-      // Guarda el texto de la respuesta en el estado 'mensaje'
-      .then((data) => setMensaje(data.texto));
-  // El array vacío asegura que se ejecute solo al montar el componente
+    fetch("/api/productos")
+      .then(res => res.json())
+      .then(data => setProductos(data.productos));
   }, []);
 
-  // Renderiza el contenido en pantalla
   return (
     <div>
-      <h1>Frontend conectado</h1>
-      {/* Muestra el mensaje recibido del backend */}
-      <p>{mensaje}</p>
+      <h1>Plataforma de Pedidos - Tendero</h1>
+      {!tenderoId && <TenderoRegistro onRegister={setTenderoId} />}
+      {tenderoId && (
+        <>
+          <PedidoForm tenderoId={tenderoId} productos={productos} onPedidoCreado={() => {}}/>
+          <PedidosList tenderoId={tenderoId} />
+        </>
+      )}
     </div>
   );
 }
