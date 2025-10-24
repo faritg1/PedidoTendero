@@ -1,0 +1,57 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(120deg, #f0f4ff, #f8fcff);
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.titulo {
+  color: #0077cc;
+  margin-bottom: 1.5rem;
+}
+
+.formulario, .lista, .tendero-panel {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  margin: 1rem auto;
+}
+
+.formulario input {
+  width: 90%;
+  padding: 0.7rem;
+  margin: 0.4rem 0;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.formulario button {
+  width: 95%;
+  padding: 0.8rem;
+  background: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.formulario button:hover {
+  background: #005fa3;
+}
+
+.card {
+  border: 1px solid #eee;
+  border-radius: 0.8rem;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  background: #f9f9f9;
+}
