@@ -1,0 +1,115 @@
+.crear-producto-container {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.crear-producto-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+.crear-producto-card h2 {
+  color: #333;
+  margin: 0 0 0.5rem 0;
+}
+
+.subtitulo {
+  color: #666;
+  margin: 0 0 2rem 0;
+  font-size: 0.95rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.btn-crear {
+  width: 100%;
+  padding: 0.9rem;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-crear:hover:not(:disabled) {
+  background: #218838;
+}
+
+.btn-crear:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  background: #fee;
+  color: #c33;
+  padding: 0.75rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  border-left: 4px solid #c33;
+}
+
+.info-box {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #e7f3ff;
+  border-radius: 5px;
+  border-left: 4px solid #2196f3;
+}
+
+.info-box p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.info-box strong {
+  color: #2196f3;
+}

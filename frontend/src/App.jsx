@@ -1,27 +1,62 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import Login from "./components/Login";
+import DashboardPlataforma from "./components/DashboardPlataforma";
+import "./App.css";
 
-// Componente principal de la aplicación
 function App() {
-  // Estado para guardar el mensaje que viene del backend
-  const [mensaje, setMensaje] = useState("");
+  const [usuario, setUsuario] = useState(null);
+  const [cargando, setCargando] = useState(true);
 
-  // Hook que se ejecuta una sola vez al cargar el componente
+  // Verificar si hay sesión activa al cargar
   useEffect(() => {
-    // Hace una petición GET al backend
-    fetch("/api/mensaje")
-      // Convierte la respuesta a JSON
-      .then((res) => res.json())
-      // Guarda el texto de la respuesta en el estado 'mensaje'
-      .then((data) => setMensaje(data.texto));
-  // El array vacío asegura que se ejecute solo al montar el componente
+    const token = localStorage.getItem('token');
+    const usuarioGuardado = localStorage.getItem('usuario');
+    
+    if (token && usuarioGuardado) {
+      setUsuario(JSON.parse(usuarioGuardado));
+    }
+    setCargando(false);
   }, []);
 
-  // Renderiza el contenido en pantalla
+  const handleLogin = (usuarioData) => {
+    setUsuario(usuarioData);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
+    setUsuario(null);
+  };
+
+  if (cargando) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh' 
+      }}>
+        <h2>Cargando...</h2>
+      </div>
+    );
+  }
+
+  // Si no hay usuario, mostrar login
+  if (!usuario) {
+    return <Login onLogin={handleLogin} />;
+  }
+
+  // Si es plataforma, mostrar dashboard de plataforma
+  if (usuario.tipo_usuario === 'plataforma') {
+    return <DashboardPlataforma usuario={usuario} onLogout={handleLogout} />;
+  }
+
+  // Por ahora, otros tipos de usuario verán esto
   return (
-    <div>
-      <h1>Frontend conectado</h1>
-      {/* Muestra el mensaje recibido del backend */}
-      <p>{mensaje}</p>
+    <div style={{ padding: '2rem' }}>
+      <h1>Bienvenido, {usuario.nombre}</h1>
+      <p>Tipo de usuario: {usuario.tipo_usuario}</p>
+      <button onClick={handleLogout}>Cerrar Sesión</button>
     </div>
   );
 }

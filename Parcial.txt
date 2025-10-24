@@ -1,0 +1,69 @@
+﻿Parcial Práctico — React + Node.js + Gitpod + SQL en línea
+
+Tema general
+Desarrollar una plataforma web de pedidos para tenderos, conectada a una base de datos SQL en línea (mysql o postgres), utilizando React, Node.js y el modelo MVC, ejecutable desde Gitpod.io.
+
+Contexto del problema
+Varios tenderos (3 o 4 tiendas) de una misma zona necesitan realizar pedidos de productos a una plataforma central.
+La plataforma agrupa los pedidos por zona y los envía a la empresa proveedora, que despacha un pedido consolidado hacia esa región.
+Ejemplo: tres o cuatro tiendas de la misma zona realizan pedidos de un producto por ejemplo arroz. En ese caso, la plataforma genera un envío consolidado con un tiempo de entrega máximo de 72 horas.
+
+Requisitos funcionales
+
+Tendero
+* Se registra con su nombre, zona y contacto.
+* Puede realizar pedidos de productos (nombre, cantidad, precio).
+* Puede consultar el estado de sus pedidos.
+* El tendero no crea nuevos productos, solo los selecciona de una lista
+* El tendero marca un producto como recibido.
+
+Plataforma (central)
+* Visualiza los pedidos de todos los tenderos y los pasa a estado en consolidación.
+* Lista los productos que están en estado consolidación y les asigna proveedor pasando al estado: en asignación
+* Realiza un pedido consolidado al proveedor (pudiendo enviar varios productos) y marca el pedido en despacho
+* Muestra el resumen de pedidos por zona y estado.
+* Permite la creación de productos
+
+Proveedor
+* Recibe los pedidos consolidados por zona.
+* Actualiza el estado del envío (en preparación, enviado, entregado).
+* Puede consultar los pedidos por zona o por tienda.
+
+Lógica general
+1. Cada tendero realiza su pedido.
+2. La plataforma guarda el pedido en la base de datos y verifica cuántas tiendas de esa zona tienen pedidos pendientes.
+3. Se seleccionan proveedores para los pedidos de productos  consolidados
+4. El proveedor recibe el pedido consolidado y actualiza su estado.
+5. Los tenderos pueden consultar el estado de sus pedidos.
+
+
+El grupo debe indagar y configurar la conexión entre Node.js y la base de datos elegida.
+
+Tecnologías requeridas
+* Frontend: React (componentes, Hooks, Fetch API).
+* Backend: Node.js + Express (modelo MVC).
+* Base de datos: SQL en línea (postgres o mysql) .
+* Ejecución: desde Gitpod.io o entorno local.
+
+Criterios de evaluación
+---------------------------------------------
+| |# | |Criterio | |Descripción | |Valor |
+---------------------------------------------
+| |1 | |Proyecto completo | |El proyecto debe estar adjunto y organizado, con las carpetas del frontend y backend correctamente estructuradas. | |1.0 |
+---------------------------------------------
+| |2 | |Ejecución funcional | |El proyecto debe correr correctamente, mostrando las vistas y permitiendo interacción. | |1.0 |
+---------------------------------------------
+| |3 | |Funcionalidad mínima | |Debe registrar pedidos, agruparlos por zona, aplicar la restricción de un pedido activo por tendero, y manejar los plazos (72 horas o una semana). | |1.0 |
+---------------------------------------------
+| |4 | |Video demostrativo | |Se debe adjuntar un video (máximo 5 minutos) mostrando la ejecución del sistema, desde el registro hasta el flujo de pedidos. | |1.0 |
+---------------------------------------------
+| |5 | |Diseño e interfaz UX | |El diseño debe ser claro, funcional y fácil de usar (sin campos manuales innecesarios). | |1.0 |
+Total: 5.0 puntos
+
+Entrega final
+El grupo debe entregar:
+1. Carpeta comprimida del proyecto (frontend + backend).
+2. Script o exportación de la base de datos SQL.
+3. Link del Video de máximo 5  minutos mostrando y explicando el sistema en funcionamiento.
+4. Capturas de pantalla de las principales pantallas del sistema.
+
