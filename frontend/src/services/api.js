@@ -99,8 +99,115 @@ export const obtenerProductos = async () => {
   return handleResponse(response);
 };
 
+// ===============================
+// TENDERO
+// ===============================
+export const obtenerProductosTendero = async () => {
+  const response = await fetch(`${API_URL}/tendero/productos`, {
+    headers: getHeaders()
+  });
+  return handleResponse(response);
+};
+
+export const verificarPedidosActivos = async () => {
+  const response = await fetch(`${API_URL}/tendero/verificar-pedidos-activos`, {
+    headers: getHeaders()
+  });
+  return handleResponse(response);
+};
+
+export const crearPedido = async (producto_id, cantidad) => {
+  const response = await fetch(`${API_URL}/tendero/pedidos`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify({ producto_id, cantidad })
+  });
+  return handleResponse(response);
+};
+
+export const obtenerMisPedidos = async () => {
+  const response = await fetch(`${API_URL}/tendero/pedidos`, {
+    headers: getHeaders()
+  });
+  return handleResponse(response);
+};
+
+export const marcarComoRecibido = async (pedido_id) => {
+  const response = await fetch(`${API_URL}/tendero/pedidos/${pedido_id}/recibido`, {
+    method: 'PUT',
+    headers: getHeaders()
+  });
+  return handleResponse(response);
+};
+
+export const obtenerEstadisticasTendero = async () => {
+  const response = await fetch(`${API_URL}/tendero/estadisticas`, {
+    headers: getHeaders()
+  });
+  return handleResponse(response);
+};
+
 export const obtenerProveedores = async () => {
   const response = await fetch(`${API_URL}/plataforma/proveedores`, {
+    headers: getHeaders()
+  });
+  return handleResponse(response);
+};
+
+// ===============================
+// PROVEEDOR
+// ===============================
+export const obtenerPedidosConsolidados = async () => {
+  const response = await fetch(`${API_URL}/proveedor/consolidados`, {
+    headers: getHeaders()
+  });
+  return handleResponse(response);
+};
+
+export const obtenerDetalleConsolidado = async (consolidado_id) => {
+  const response = await fetch(`${API_URL}/proveedor/consolidados/${consolidado_id}`, {
+    headers: getHeaders()
+  });
+  return handleResponse(response);
+};
+
+export const actualizarEstadoConsolidado = async (consolidado_id, nuevo_estado, observaciones) => {
+  const response = await fetch(`${API_URL}/proveedor/consolidados/${consolidado_id}/estado`, {
+    method: 'PUT',
+    headers: getHeaders(),
+    body: JSON.stringify({ nuevo_estado, observaciones })
+  });
+  return handleResponse(response);
+};
+
+export const obtenerPedidosProveedor = async (filtros = {}) => {
+  const params = new URLSearchParams();
+  if (filtros.zona) params.append('zona', filtros.zona);
+  if (filtros.tendero_id) params.append('tendero_id', filtros.tendero_id);
+  
+  const response = await fetch(`${API_URL}/proveedor/pedidos?${params}`, {
+    headers: getHeaders()
+  });
+  return handleResponse(response);
+};
+
+export const obtenerEstadisticasProveedor = async () => {
+  const response = await fetch(`${API_URL}/proveedor/estadisticas`, {
+    headers: getHeaders()
+  });
+  return handleResponse(response);
+};
+
+export const obtenerZonasAsignadas = async () => {
+  const response = await fetch(`${API_URL}/proveedor/zonas`, {
+    headers: getHeaders()
+  });
+  return handleResponse(response);
+};
+
+export const obtenerTiendasPorZona = async (zona = null) => {
+  const params = zona ? `?zona=${zona}` : '';
+  const response = await fetch(`${API_URL}/proveedor/tiendas${params}`, {
     headers: getHeaders()
   });
   return handleResponse(response);

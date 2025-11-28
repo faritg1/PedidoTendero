@@ -1,6 +1,9 @@
 -- Base de datos para Sistema de Pedidos para Tenderos
 -- MySQL/XAMPP Compatible - VERSIÓN MEJORADA
 
+create DATABASE pedido;
+use pedido;
+
 -- =======================
 -- TABLA DE USUARIOS
 -- =======================
@@ -30,6 +33,23 @@ CREATE TABLE productos (
 );
 
 -- =======================
+-- TABLA DE PEDIDOS CONSOLIDADOS
+-- =======================
+CREATE TABLE pedidos_consolidados (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    zona VARCHAR(50) NOT NULL,
+    proveedor_id INT,
+    estado ENUM('en_preparacion', 'enviado', 'entregado') DEFAULT 'en_preparacion',
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_despacho TIMESTAMP NULL,
+    fecha_entrega_estimada TIMESTAMP NULL, -- Máximo 72 horas
+    total_productos INT DEFAULT 0,
+    total_valor DECIMAL(10, 2) DEFAULT 0,
+    observaciones TEXT,
+    FOREIGN KEY (proveedor_id) REFERENCES usuarios(id)
+);
+
+-- =======================
 -- TABLA DE PEDIDOS INDIVIDUALES
 -- =======================
 CREATE TABLE pedidos (
@@ -52,22 +72,6 @@ CREATE TABLE pedidos (
     FOREIGN KEY (pedido_consolidado_id) REFERENCES pedidos_consolidados(id)
 );
 
--- =======================
--- TABLA DE PEDIDOS CONSOLIDADOS
--- =======================
-CREATE TABLE pedidos_consolidados (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    zona VARCHAR(50) NOT NULL,
-    proveedor_id INT,
-    estado ENUM('en_preparacion', 'enviado', 'entregado') DEFAULT 'en_preparacion',
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_despacho TIMESTAMP NULL,
-    fecha_entrega_estimada TIMESTAMP NULL, -- Máximo 72 horas
-    total_productos INT DEFAULT 0,
-    total_valor DECIMAL(10, 2) DEFAULT 0,
-    observaciones TEXT,
-    FOREIGN KEY (proveedor_id) REFERENCES usuarios(id)
-);
 
 -- =======================
 -- TABLA DE DETALLE CONSOLIDADO (Para reportes)

@@ -3,31 +3,29 @@ import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.js";
 import plataformaRoutes from "./routes/plataforma.js";
+import tenderoRoutes from "./routes/tendero.js";
+import proveedorRoutes from "./routes/proveedor.js";
 
-// Cargar variables de entorno
 dotenv.config();
 
-// Verificar que las variables de entorno se cargaron
 console.log('🔧 Configuración de Base de Datos:');
 console.log('Host:', process.env.DB_HOST);
 console.log('Database:', process.env.DB_NAME);
 console.log('Port:', process.env.DB_PORT);
 
-// Crea una instancia de la aplicación Express
 const app = express();
 
-// Define el puerto del servidor
 const PORT = process.env.PORT || 3000;
 
-// Habilita CORS para permitir peticiones desde otros dominios
 app.use(cors());
 
-// Middleware para parsear el cuerpo de las peticiones en formato JSON
 app.use(express.json());
 
 // Rutas
 app.use("/api/auth", authRoutes);
 app.use("/api/plataforma", plataformaRoutes);
+app.use("/api/tendero", tenderoRoutes);
+app.use("/api/proveedor", proveedorRoutes);
 
 // Ruta de prueba (GET)
 app.get("/api/mensaje", (req, res) => {
